@@ -212,3 +212,7 @@ button:focus-visible {
 .pie a {
   color: var(--color-principal);
 }
+.pie #version {
+  font-weight: bold;
+}
+  
