@@ -3,6 +3,7 @@
 Aplicación web que permite buscar personajes de la serie Rick and Morty por nombre y filtrarlos por estado y género, consultando en tiempo real la API pública de la serie. Resuelve el problema de encontrar rápidamente un personaje combinando varios criterios de búsqueda.
 
 **Autor:** Rodrigo Ramírez · Fundamentos de Desarrollo Web · UCSA
+
 **Variante del TP:** A (filtro por género)
 
 ## Sitios publicados
