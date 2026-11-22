@@ -7,7 +7,7 @@ Aplicación web que permite buscar personajes de la serie Rick and Morty por nom
 
 ## Sitios publicados
 - GitHub Pages: https://wesolin.github.io/tp-ramirez-rodrigo/
-- Vercel / Netlify: URL_PENDIENTE
+- Vercel / Netlify: https://tp-ramirez-rodrigo.vercel.app
 
 ## Captura
 ![Captura de la aplicación](img/captura.png)
