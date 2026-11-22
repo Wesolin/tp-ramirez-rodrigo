@@ -4,7 +4,7 @@ Aplicación web que permite buscar personajes de la serie Rick and Morty por nom
 
 **Autor:** Rodrigo Ramírez · Fundamentos de Desarrollo Web · UCSA
 
-**Variante del TP:** A (filtro por género)
+**Variante del TP:** A · Personajes (último dígito de cédula: 0). Filtro de la variante: estado; además se agregó un filtro por género.
 
 ## Sitios publicados
 - GitHub Pages: https://wesolin.github.io/tp-ramirez-rodrigo/
@@ -21,6 +21,7 @@ Aplicación web que permite buscar personajes de la serie Rick and Morty por nom
 - Tarjetas con imagen, estado, especie, género, origen, última ubicación y cantidad de episodios.
 - Contador de resultados encontrados y mostrados.
 - Mensajes de carga, de «sin resultados» y de error de conexión.
+- La última búsqueda (nombre y filtros) se guarda en `localStorage` y se repite al recargar la página.
 - Número de versión visible en el pie de página.
 
 ## Tecnologías

@@ -7,6 +7,7 @@
 const URL_PERSONAJES = "https://rickandmortyapi.com/api/character";
 const TEXTO_DESCONOCIDO = "Desconocido";
 const SIN_VALOR = "";
+const CLAVE_BUSQUEDA = "ultimaBusqueda";
 
 // La API devuelve estos valores en inglés; los traducimos para mostrarlos
 const ESTADOS = {
@@ -52,6 +53,30 @@ const construirUrlBusqueda = (criterios) => {
     }
   });
   return url;
+};
+
+// ---------- 3b. Persistencia en localStorage ----------
+const guardarCriterios = (criterios) => {
+  try {
+    localStorage.setItem(CLAVE_BUSQUEDA, JSON.stringify(criterios));
+  } catch (error) {
+    console.warn("No se pudo guardar la búsqueda:", error);
+  }
+};
+
+const leerCriteriosGuardados = () => {
+  try {
+    const guardado = localStorage.getItem(CLAVE_BUSQUEDA);
+    return guardado ? JSON.parse(guardado) : null;
+  } catch (error) {
+    return null;
+  }
+};
+
+const rellenarFormulario = (criterios) => {
+  campoNombre.value = criterios.name ?? SIN_VALOR;
+  filtroEstado.value = criterios.status ?? SIN_VALOR;
+  filtroGenero.value = criterios.gender ?? SIN_VALOR;
 };
 
 // ---------- 4. Acceso a la API (no toca el DOM) ----------
@@ -169,10 +194,7 @@ const activarCarga = (estaCargando) => {
 };
 
 // ---------- 8. Manejador del formulario ----------
-const manejarBusqueda = async (evento) => {
-  evento.preventDefault();
-  const criterios = leerCriterios();
-
+const ejecutarBusqueda = async (criterios) => {
   if (!hayCriterios(criterios)) {
     limpiarResultados();
     mostrarMensaje("Escribe un nombre o elige un filtro para buscar.", true);
@@ -180,6 +202,7 @@ const manejarBusqueda = async (evento) => {
     return;
   }
 
+  guardarCriterios(criterios);
   activarCarga(true);
   mostrarMensaje("Buscando personajes…");
   limpiarResultados();
@@ -209,5 +232,23 @@ const manejarBusqueda = async (evento) => {
   }
 };
 
+const manejarBusqueda = (evento) => {
+  evento.preventDefault();
+  ejecutarBusqueda(leerCriterios());
+};
+
+// Al cargar la página, recupera la última búsqueda y la repite
+const restaurarUltimaBusqueda = () => {
+  const criterios = leerCriteriosGuardados();
+  if (!criterios) {
+    return;
+  }
+  rellenarFormulario(criterios);
+  if (hayCriterios(leerCriterios())) {
+    ejecutarBusqueda(leerCriterios());
+  }
+};
+
 // ---------- 9. Registro de eventos ----------
 formularioBusqueda.addEventListener("submit", manejarBusqueda);
+restaurarUltimaBusqueda();
